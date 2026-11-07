@@ -91,6 +91,7 @@ input[type=color]{width:38px;height:38px;border:1px solid var(--line);border-rad
 .ord .nm{flex:1;font-weight:500}
 .err{color:var(--danger);font-size:.9rem;margin:10px 0}
 .party{font-size:1rem;margin-top:14px;font-weight:600}
+.bk{margin-top:34px}.bk summary{cursor:pointer;font-weight:600;padding:12px 16px;border-radius:14px;background:var(--card);border:1px solid var(--line)}.bk .in{padding:16px 4px}.bk textarea{width:100%;min-height:84px;font:inherit;font-size:.8rem;color:var(--text);background:var(--solid);border:1px solid var(--line);border-radius:10px;padding:10px;margin:8px 0;resize:vertical;word-break:break-all}.bk .btns{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:6px}.msg{font-size:.9rem;margin-top:8px;font-weight:600}
 [hidden]{display:none!important}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
@@ -141,6 +142,7 @@ input[type=color]{width:38px;height:38px;border:1px solid var(--line);border-rad
     <div class="foot"><button id="edSave">Opslaan</button><button class="ghost" id="edCancel">Annuleren</button></div>
   </div>
 </section>
+<details class="bk" id="bk"><summary>💾 Back-up &amp; overzetten naar een ander apparaat</summary><div class="in"><p class="note" style="margin-top:0"><b>Op dit apparaat:</b> klik op &ldquo;Kopieer back-up&rdquo;. <b>Op het andere apparaat:</b> open deze site, plak de code in het vak en klik op &ldquo;Importeer&rdquo;.</p><div class="btns"><button id="bkCopy" class="ghost sm">📋 Kopieer back-up</button><button id="bkImp" class="sm">⬇️ Importeer</button></div><textarea id="bkText" placeholder="Plak hier je back-upcode en klik op Importeer" aria-label="Back-upcode"></textarea><div id="bkMsg" class="msg"></div></div></details>
 </main>
 
 <script>
@@ -191,7 +193,7 @@ $("theme").onclick=function(){
 
 /* eerste keuze */
 function renderSetup(){
-  state=null;
+  state=null;$("bk").hidden=false;
   $("setup").hidden=false;$("plan").hidden=true;$("editor").hidden=true;$("editBtn").hidden=true;
   $("subtitle").textContent="Elke week 3 vakken, in een vaste cyclus.";
   var box=$("opts");box.innerHTML="";
@@ -219,7 +221,7 @@ $("lock").onclick=function(){
 
 /* overzicht */
 function renderPlan(st){
-  state=st;
+  state=st;$("bk").hidden=false;
   $("setup").hidden=true;$("editor").hidden=true;$("plan").hidden=false;$("editBtn").hidden=false;
   var L=cycleLen(st.order.length);
   $("subtitle").textContent="3 vakken per week · cyclus van "+L+(L===1?" week":" weken");
@@ -273,7 +275,7 @@ $("reset").onclick=function(){
 
 /* aanpassen */
 $("editBtn").onclick=function(){
-  draft=clone(state);
+  draft=clone(state);$("bk").hidden=true;
   $("plan").hidden=true;$("editBtn").hidden=true;$("editor").hidden=false;$("edErr").hidden=true;
   $("edStart").value=draft.start;renderEditor();
 };
@@ -322,6 +324,33 @@ $("edSave").onclick=function(){
   else if(!draft.start)err="Kies een startdatum.";
   if(err){$("edErr").textContent=err;$("edErr").hidden=false;return}
   save(draft);renderPlan(draft);draft=null;
+};
+
+/* back-up */
+function bkMsg(t,ok){var m=$("bkMsg");m.textContent=t;m.style.color=ok?"#10b981":"var(--danger)"}
+function encode(s){return"WP1:"+btoa(unescape(encodeURIComponent(JSON.stringify(s))))}
+function decode(t){
+  t=(t||"").trim();if(t.indexOf("WP1:")!==0)throw 0;
+  var o=JSON.parse(decodeURIComponent(escape(atob(t.slice(4)))));
+  if(!o||!Array.isArray(o.subjects)||!Array.isArray(o.order)||o.order.length<3||typeof o.start!=="string")throw 0;
+  var m={};o.subjects.forEach(function(s){m[s.id]=1});
+  if(o.order.some(function(id){return!m[id]}))throw 0;
+  return norm(o);
+}
+$("bkCopy").onclick=function(){
+  var cur=state||mem;
+  if(!cur){bkMsg("Er is nog niets om te bewaren. Maak eerst je cyclus.",false);return}
+  var code=encode(cur),ta=$("bkText");ta.value=code;ta.focus();ta.select();
+  var done=function(){bkMsg("✓ Back-up gekopieerd. Plak hem op je andere apparaat.",true)};
+  try{
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(code).then(done,function(){bkMsg("De code staat in het vak. Kopieer hem met Ctrl+C (of lang indrukken op je telefoon).",true)});return}
+    if(document.execCommand("copy")){done();return}
+  }catch(e){}
+  bkMsg("De code staat in het vak. Kopieer hem met Ctrl+C (of lang indrukken op je telefoon).",true);
+};
+$("bkImp").onclick=function(){
+  try{var o=decode($("bkText").value);save(o);renderPlan(o);bkMsg("✓ Back-up geïmporteerd.",true);$("bkText").value=""}
+  catch(e){bkMsg("Deze code werkt niet. Kopieer de hele code opnieuw, inclusief WP1: vooraan.",false)}
 };
 
 var st=load()||mem;
