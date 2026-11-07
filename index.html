@@ -92,6 +92,37 @@ input[type=color]{width:38px;height:38px;border:1px solid var(--line);border-rad
 .err{color:var(--danger);font-size:.9rem;margin:10px 0}
 .party{font-size:1rem;margin-top:14px;font-weight:600}
 .bk{margin-top:34px}.bk summary{cursor:pointer;font-weight:600;padding:12px 16px;border-radius:14px;background:var(--card);border:1px solid var(--line)}.bk .in{padding:16px 4px}.bk textarea{width:100%;min-height:84px;font:inherit;font-size:.8rem;color:var(--text);background:var(--solid);border:1px solid var(--line);border-radius:10px;padding:10px;margin:8px 0;resize:vertical;word-break:break-all}.bk .btns{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:6px}.msg{font-size:.9rem;margin-top:8px;font-weight:600}
+.tabs{display:flex;gap:6px;padding:5px;border-radius:16px;background:var(--card);border:1px solid var(--line);margin-bottom:22px;width:max-content;max-width:100%}
+.tabs button{background:transparent;color:var(--muted);padding:9px 18px}
+.tabs button.on{background:var(--accent);color:var(--accent-t);box-shadow:var(--shadow)}
+.nq{width:100%;font:inherit;color:var(--text);background:var(--solid);border:1px solid var(--line);border-radius:14px;padding:12px 16px;margin-bottom:12px}
+.nres{display:grid;gap:6px;margin-bottom:12px}
+.nres button{text-align:left;display:flex;gap:10px;align-items:center;background:var(--card);color:var(--text);border:1px solid var(--line);font-weight:500;padding:9px 12px}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:4px 2px 12px;margin-bottom:8px}
+.chip{flex:none;background:var(--card);color:var(--text);border:1px solid var(--line);border-left:6px solid var(--c);padding:9px 14px;display:flex;gap:8px;align-items:center}
+.chip.on{background:color-mix(in srgb,var(--c) 18%,var(--solid));border-color:var(--c);box-shadow:var(--shadow)}
+.chip i{font-style:normal;color:var(--c);font-size:.7rem}
+.chip em{font-style:normal;font-size:.75rem;background:var(--c);color:#fff;border-radius:999px;padding:1px 8px}
+.nh{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:flex-end;padding:22px;border-radius:22px;border:1px solid var(--line);border-top:8px solid var(--c);background:linear-gradient(135deg,color-mix(in srgb,var(--c) 14%,var(--solid)),var(--card));box-shadow:var(--shadow);margin-bottom:14px}
+.nh h2{margin:2px 0 0;font-size:1.8rem}
+.nst{display:flex;gap:8px;flex-wrap:wrap}.nst span{padding:5px 12px;border-radius:999px;background:var(--solid);border:1px solid var(--line);font-size:.8rem;font-weight:600}
+.ns{padding:20px;border-radius:20px;background:var(--card);border:1px solid var(--line);border-top:3px solid color-mix(in srgb,var(--c) 70%,transparent);margin-bottom:14px}
+.ns h3{font-family:var(--head);font-size:1.1rem;margin:0 0 12px}
+.ns textarea{width:100%;min-height:90px;font:inherit;color:var(--text);background:var(--solid);border:1px solid var(--line);border-radius:12px;padding:12px;resize:vertical}
+.x{background:transparent;color:var(--muted);padding:4px 8px;font-weight:500;font-size:.85rem}
+.add{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.add input[type=text]{flex:1;min-width:140px}
+.nt{padding:14px;border-radius:16px;background:var(--solid);border:1px solid var(--line);margin-bottom:10px}
+.nt .ti{width:100%;font-family:var(--head);font-size:1.15rem;font-weight:700;border:0;background:transparent;padding:4px 0;margin-bottom:6px;color:var(--text);outline:0}
+.nt textarea{min-height:120px}
+.nt .ft{display:flex;justify-content:space-between;align-items:center;font-size:.78rem;color:var(--muted);margin-top:6px}
+.empty{color:var(--muted);font-size:.9rem;margin:4px 0}
+.drop{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:16px;border:2px dashed var(--line);border-radius:14px;margin-bottom:10px;transition:.15s}
+.drop.ov{border-color:var(--c);background:color-mix(in srgb,var(--c) 10%,transparent)}
+.fbtn{display:inline-block;padding:9px 16px;border-radius:12px;background:var(--c);color:#fff;font-weight:600;cursor:pointer}
+.fi{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:12px;background:var(--solid);border:1px solid var(--line);margin-bottom:6px}
+.fi .ic{font-size:1.3rem}.fi .fn{flex:1;font-weight:600;word-break:break-all;color:var(--text);text-decoration:none;min-width:0}
+.fi a.fn:hover{text-decoration:underline}.fi .fm{font-size:.78rem;color:var(--muted);white-space:nowrap}
+.fh{margin:14px 0 6px;font-size:.8rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:600}
 [hidden]{display:none!important}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
@@ -102,6 +133,7 @@ input[type=color]{width:38px;height:38px;border:1px solid var(--line);border-rad
   <div class="logo"><i>📅</i><div><h1>Weekplanner</h1><p class="sub" id="subtitle">Elke week 3 vakken, in een vaste cyclus.</p></div></div>
   <div class="hb"><button class="ghost sm" id="theme" title="Licht/donker">🌓</button><button class="ghost sm" id="editBtn" hidden>✏️ Aanpassen</button></div>
 </header>
+<nav class="tabs" id="tabs" hidden><button data-v="plan" class="on">📅 Planner</button><button data-v="notes">📝 Notities</button></nav>
 
 <section id="setup" hidden>
   <div class="card">
@@ -124,6 +156,13 @@ input[type=color]{width:38px;height:38px;border:1px solid var(--line);border-rad
     <button class="ghost sm" id="reset">Alles resetten</button>
     <span class="note" id="resetnote"></span>
   </div>
+</section>
+
+<section id="notes" hidden>
+  <input type="search" id="nq" class="nq" placeholder="🔍 Zoek in je notities en links…" aria-label="Zoeken">
+  <div class="nres" id="nres"></div>
+  <div class="chips" id="nchips"></div>
+  <div id="nbody"></div>
 </section>
 
 <section id="editor" hidden>
@@ -158,7 +197,7 @@ var mem=null,state=null,draft=null;
 function esc(s){return String(s).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
 function col(c){return/^#[0-9a-f]{6}$/i.test(c)?c:"#6366f1"}
 function clone(o){return JSON.parse(JSON.stringify(o))}
-function norm(st){st.subjects.forEach(function(s,i){s.c=col(s.c||PAL[i%PAL.length])});st.done=st.done||{};return st}
+function norm(st){st.subjects.forEach(function(s,i){s.c=col(s.c||PAL[i%PAL.length])});st.done=st.done||{};st.notes=st.notes||{};return st}
 function load(){
   try{
     var r=localStorage.getItem(KEY)||localStorage.getItem(K2);
@@ -193,7 +232,7 @@ $("theme").onclick=function(){
 
 /* eerste keuze */
 function renderSetup(){
-  state=null;$("bk").hidden=false;
+  state=null;$("bk").hidden=false;$("tabs").hidden=true;$("notes").hidden=true;
   $("setup").hidden=false;$("plan").hidden=true;$("editor").hidden=true;$("editBtn").hidden=true;
   $("subtitle").textContent="Elke week 3 vakken, in een vaste cyclus.";
   var box=$("opts");box.innerHTML="";
@@ -221,7 +260,7 @@ $("lock").onclick=function(){
 
 /* overzicht */
 function renderPlan(st){
-  state=st;$("bk").hidden=false;
+  state=st;$("bk").hidden=false;$("tabs").hidden=false;setTab("plan");
   $("setup").hidden=true;$("editor").hidden=true;$("plan").hidden=false;$("editBtn").hidden=false;
   var L=cycleLen(st.order.length);
   $("subtitle").textContent="3 vakken per week · cyclus van "+L+(L===1?" week":" weken");
@@ -275,7 +314,7 @@ $("reset").onclick=function(){
 
 /* aanpassen */
 $("editBtn").onclick=function(){
-  draft=clone(state);$("bk").hidden=true;
+  draft=clone(state);$("bk").hidden=true;$("tabs").hidden=true;$("notes").hidden=true;
   $("plan").hidden=true;$("editBtn").hidden=true;$("editor").hidden=false;$("edErr").hidden=true;
   $("edStart").value=draft.start;renderEditor();
 };
@@ -325,6 +364,103 @@ $("edSave").onclick=function(){
   if(err){$("edErr").textContent=err;$("edErr").hidden=false;return}
   save(draft);renderPlan(draft);draft=null;
 };
+
+/* notities */
+var NV={sid:null,q:""};
+function nd(id){var n=state.notes=state.notes||{};return n[id]||(n[id]={sum:"",tasks:[],terms:[],notes:[]})}
+function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,5)}
+function setTab(v){
+  document.querySelectorAll("#tabs button").forEach(b=>b.classList.toggle("on",b.getAttribute("data-v")===v));
+  $("plan").hidden=v!=="plan";$("notes").hidden=v!=="notes";
+  if(v==="notes")renderNotes();
+}
+document.querySelectorAll("#tabs button").forEach(b=>{b.onclick=()=>setTab(b.getAttribute("data-v"))});
+function curIds(){
+  var L=cycleLen(state.order.length),n=Math.round((mondayOf(new Date())-mondayOf(parse(state.start)))/(7*864e5));
+  return weekSubjects(state,((n%L)+L)%L).map(s=>s.id);
+}
+function renderNotes(){
+  var st=state,ids=curIds(),m=byId(st);
+  if(!NV.sid||!m[NV.sid])NV.sid=ids[0];
+  $("nchips").innerHTML=st.subjects.map(s=>{var o=nd(s.id).notes.length;
+    return'<button class="chip'+(s.id===NV.sid?" on":"")+'" data-s="'+esc(s.id)+'" style="--c:'+col(s.c)+'">'+esc(s.n)+(ids.indexOf(s.id)>=0?"<i>●</i>":"")+(o?"<em>"+o+"</em>":"")+"</button>"}).join("");
+  var s=m[NV.sid],d=nd(s.id);
+  var h='<div class="nw" style="--c:'+col(s.c)+'"><div class="nh"><div><div class="eyebrow">'+s.sp+" SP"+(ids.indexOf(s.id)>=0?" · deze week":"")+"</div><h2>"+esc(s.n)+'</h2></div><div class="nst"><span>'+d.notes.length+" notities</span><span>"+(d.links||[]).length+" links</span></div></div>";
+  h+='<div class="ns"><h3>📎 Bestanden &amp; links</h3><div class="drop" id="drop"><label class="fbtn">+ Bestand kiezen<input type="file" id="fin" multiple hidden></label><span class="note">of sleep bestanden hierheen: Word, PDF, PowerPoint, Excel, afbeeldingen…</span></div><div id="fl"><p class="empty">Bestanden laden…</p></div><p class="note" style="margin:6px 0 0">Bestanden blijven op dit apparaat. Word-bestanden worden gedownload en openen dan in Word. Wil je iets op elk apparaat? Voeg dan hieronder een link naar OneDrive of Google Drive toe.</p><div class="fh">Links</div>'+((d.links||[]).length?d.links.map(l=>'<div class="fi"><span class="ic">🔗</span><a class="fn" href="'+esc(l.u)+'" target="_blank" rel="noopener noreferrer">'+esc(l.t)+'</a><button class="x" data-a="dl" data-i="'+l.id+'" title="Verwijderen">✕</button></div>').join(""):'<p class="empty">Nog geen links.</p>')+'<div class="add"><input type="text" id="lT" placeholder="Naam van de link"><input type="text" id="lU" placeholder="https://…"><button class="sm" data-a="al">+ Link</button></div></div>';
+  h+='<div class="ns"><h3>📝 Notities</h3><button class="sm" data-a="an">+ Nieuwe notitie</button><div style="margin-top:12px">'+(d.notes.length?d.notes.map(x=>'<div class="nt"><input class="ti" type="text" data-k="note" data-f="t" data-i="'+x.id+'" value="'+esc(x.t)+'" placeholder="Titel"><textarea data-k="note" data-f="b" data-i="'+x.id+'" placeholder="Schrijf hier je notitie…">'+esc(x.b)+'</textarea><div class="ft"><span>'+fmt(parse(x.ts))+'</span><button class="x" data-a="dn" data-i="'+x.id+'">🗑 Verwijderen</button></div></div>').join(""):'<p class="empty">Nog geen notities.</p>')+"</div></div></div>";
+  $("nbody").innerHTML=h;bindFiles();
+}
+/* bestanden (IndexedDB, per apparaat) */
+var _db;
+function db(){return _db||(_db=new Promise((ok,no)=>{var r=indexedDB.open("weekplanner-files",1);r.onupgradeneeded=()=>r.result.createObjectStore("f",{keyPath:"id"});r.onsuccess=()=>ok(r.result);r.onerror=()=>no(r.error)}))}
+function tx(m,fn){return db().then(d=>new Promise((ok,no)=>{var t=d.transaction("f",m),q=fn(t.objectStore("f"));t.oncomplete=()=>ok(q&&q.result);t.onerror=()=>no(t.error)}))}
+function fsz(n){return n<1024?n+" B":n<1048576?Math.round(n/1024)+" KB":(n/1048576).toFixed(1)+" MB"}
+function ficon(n){var e=(n.split(".").pop()||"").toLowerCase();return/^(docx?|odt|rtf)$/.test(e)?"📘":/^(xlsx?|csv)$/.test(e)?"📗":/^(pptx?)$/.test(e)?"📙":e==="pdf"?"📕":/^(png|jpe?g|gif|webp|svg)$/.test(e)?"🖼️":/^(zip|rar|7z)$/.test(e)?"🗜️":"📄"}
+function fileMsg(t){var l=$("fl");if(l)l.innerHTML='<p class="empty">'+t+"</p>"}
+function renderFiles(){
+  var sid=NV.sid;
+  tx("readonly",s=>s.getAll()).then(a=>{
+    if(sid!==NV.sid||!$("fl"))return;
+    a=a.filter(f=>f.sid===sid).sort((x,y)=>y.ts.localeCompare(x.ts));
+    $("fl").innerHTML=a.length?a.map(f=>'<div class="fi"><span class="ic">'+ficon(f.name)+'</span><span class="fn">'+esc(f.name)+'</span><span class="fm">'+fsz(f.size)+" · "+fmt(parse(f.ts))+'</span><button class="sm" data-a="of" data-i="'+f.id+'">Openen</button><button class="x" data-a="df" data-i="'+f.id+'" title="Verwijderen">✕</button></div>').join(""):'<p class="empty">Nog geen bestanden.</p>';
+  }).catch(()=>fileMsg("Bestanden opslaan werkt niet in deze browser of dit venster (privémodus?). Gebruik een link."));
+}
+function addFiles(list){
+  var arr=Array.from(list),sid=NV.sid;if(!arr.length)return;
+  Promise.all(arr.map(f=>tx("readwrite",s=>s.put({id:uid(),sid:sid,name:f.name,type:f.type,size:f.size,ts:iso(new Date()),blob:f})))).then(renderFiles).catch(()=>fileMsg("Opslaan is niet gelukt. Het bestand is misschien te groot of opslag is geblokkeerd."));
+}
+function openFile(id){
+  tx("readonly",s=>s.get(id)).then(f=>{
+    if(!f)return;var u=URL.createObjectURL(f.blob),a=document.createElement("a");a.href=u;
+    if(/^(application\/pdf|image\/|text\/)/.test(f.type)){a.target="_blank";a.rel="noopener"}else a.download=f.name;
+    document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),60000);
+  });
+}
+function delFile(id){tx("readwrite",s=>s.delete(id)).then(renderFiles)}
+function bindFiles(){
+  var fin=$("fin"),dr=$("drop");
+  fin.onchange=()=>{addFiles(fin.files);fin.value=""};
+  dr.ondragover=e=>{e.preventDefault();dr.classList.add("ov")};
+  dr.ondragleave=()=>dr.classList.remove("ov");
+  dr.ondrop=e=>{e.preventDefault();dr.classList.remove("ov");addFiles(e.dataTransfer.files)};
+  try{if(navigator.storage&&navigator.storage.persist)navigator.storage.persist()}catch(e){}
+  renderFiles();
+}
+$("nchips").onclick=e=>{var b=e.target.closest("[data-s]");if(b){NV.sid=b.getAttribute("data-s");renderNotes()}};
+$("nbody").addEventListener("input",e=>{
+  var el=e.target,k=el.getAttribute("data-k");if(!k)return;var d=nd(NV.sid);
+  {var x=d.notes.find(y=>y.id===el.getAttribute("data-i"));if(x)x[el.getAttribute("data-f")]=el.value}
+  save(state);
+});
+$("nbody").addEventListener("keydown",e=>{
+  if(e.key==="Enter"&&e.target.tagName==="INPUT"){var r=e.target.closest(".add");if(r)r.querySelector("button").click()}
+});
+$("nbody").addEventListener("click",e=>{
+  var b=e.target.closest("[data-a]");if(!b)return;
+  var a=b.getAttribute("data-a"),i=b.getAttribute("data-i"),d=nd(NV.sid),f=null;
+  if(a==="of"){openFile(i);return}
+  if(a==="df"){if(!b.dataset.arm){b.dataset.arm=1;b.textContent="Zeker?";return}delFile(i);return}
+  d.links=d.links||[];
+  if(a==="al"){var u=$("lU").value.trim();if(!u)return;if(!/^https?:\/\//i.test(u))u="https://"+u;
+    try{var uo=new URL(u);if(!/^https?:$/.test(uo.protocol))return;d.links.push({id:uid(),t:$("lT").value.trim()||uo.hostname,u:uo.href});f="lU"}
+    catch(er){$("lU").style.borderColor="var(--danger)";return}}
+  else if(a==="dl")d.links=d.links.filter(y=>y.id!==i);
+  else if(a==="an")d.notes.unshift({id:uid(),t:"",b:"",ts:iso(new Date())});
+  else if(a==="dn"){if(!b.dataset.arm){b.dataset.arm=1;b.textContent="Zeker? Klik nogmaals";return}d.notes=d.notes.filter(y=>y.id!==i)}
+  save(state);renderNotes();
+  if(f)$(f).focus();
+  if(a==="an"){var ti=document.querySelector(".nt .ti");if(ti)ti.focus()}
+});
+$("nq").oninput=function(){
+  var q=this.value.trim().toLowerCase(),r=[];
+  if(q&&state)state.subjects.forEach(s=>{
+    var d=nd(s.id),add=l=>r.push('<button data-s="'+esc(s.id)+'"><span class="pill" style="--c:'+col(s.c)+'">'+esc(s.n)+"</span>"+esc(l)+"</button>");
+    d.notes.forEach(x=>{if((x.t+" "+x.b).toLowerCase().includes(q))add("📝 "+(x.t||"(zonder titel)"))});
+    (d.links||[]).forEach(x=>{if(x.t.toLowerCase().includes(q))add("🔗 "+x.t)});
+  });
+  $("nres").innerHTML=q?(r.length?r.slice(0,12).join(""):'<p class="empty">Niets gevonden.</p>'):"";
+};
+$("nres").onclick=e=>{var b=e.target.closest("[data-s]");if(b){NV.sid=b.getAttribute("data-s");$("nq").value="";$("nres").innerHTML="";renderNotes()}};
 
 /* back-up */
 function bkMsg(t,ok){var m=$("bkMsg");m.textContent=t;m.style.color=ok?"#10b981":"var(--danger)"}
